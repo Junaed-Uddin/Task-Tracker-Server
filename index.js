@@ -86,7 +86,8 @@ run().catch(console.dir);
  app.get('/allTasks/:id', async (req, res) => {
      try {
          const { id } = req.params;
-         const query = { _id: ObjectId(id) };
+         console.log(id)
+         const query = { _id: new ObjectId(id) };
          const task = await Tasks.findOne(query);
          res.send({
              success: true,
@@ -104,7 +105,7 @@ run().catch(console.dir);
  app.delete('/task/:id', async (req, res) => {
      try {
          const { id } = req.params;
-         const query = { _id: ObjectId(id) };
+         const query = { _id: new ObjectId(id) };
          const result = await Tasks.deleteOne(query);
          if (result.deletedCount) {
              res.send({
@@ -131,7 +132,7 @@ run().catch(console.dir);
  app.patch('/editTask/:id', async (req, res) => {
      try {
          const { id } = req.params;
-         const filter = { _id: ObjectId(id) };
+         const filter = { _id: new ObjectId(id) };
          const updateDoc = {
              $set: {
                  taskName: req.body.taskName,
@@ -165,7 +166,7 @@ run().catch(console.dir);
  app.put('/taskStatus/:id', async (req, res) => {
      try {
          const { id } = req.params;
-         const filter = { _id: ObjectId(id) };
+         const filter = { _id: new ObjectId(id) };
          const options = { upsert: true };
          const updateStatus = {
              $set: {
@@ -216,7 +217,7 @@ run().catch(console.dir);
  app.put('/incompleteTask/:id', async (req, res) => {
      try {
          const { id } = req.params;
-         const filter = { _id: ObjectId(id) };
+         const filter = { _id: new ObjectId(id) };
          const options = { upsert: true };
          const updateTask = {
              $set: {
